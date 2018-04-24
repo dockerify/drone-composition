@@ -1,12 +1,14 @@
-version: '2'
+version: '3'
 
 services:
   drone-server:
     image: drone/drone:0.8
 
     ports:
-      - 80:8000
-      - 9000
+      - '80:8000'
+      - '9000'
+    networks:
+      - default
     volumes:
       - /var/lib/drone:/var/lib/drone/
     restart: always
@@ -19,10 +21,15 @@ services:
 
     command: agent
     restart: always
+    links: [drone-server]
     depends_on: [drone-server]
+    networks:
+      - default
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file: '.drone.secret.env'
     environment:
       - DRONE_SERVER=drone-server:9000
-
+networks:
+  default:
+    driver: bridge
