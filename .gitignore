@@ -1,3 +1,4 @@
+drone-data/
 *.env
 *.envrc
 *.swp
