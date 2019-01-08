@@ -1,8 +1,8 @@
-.PHONY: all cleanup compose creds
+.PHONY: all clean compose creds
 
-all: creds compose cleanup
+all: creds compose clean
 
-cleanup:
+clean:
 	rm .drone.env
 	rm .drone.secret.env
 
