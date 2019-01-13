@@ -2,21 +2,31 @@
 
 #### usage
 
+**Single Machine**
+
 - create `.drone.env` file with the following environment variables
 
-
 ```
-DRONE_OPEN=false
-DRONE_HOST=http://localhost:8000
-DRONE_ORGS=
-DRONE_ADMIN=
-DRONE_GITHUB=true
-DRONE_GITHUB_CLIENT=
-DRONE_GITHUB_SECRET=
+DRONE_GITHUB_CLIENT_ID={{ your-github-client-id }}
+DRONE_GITHUB_CLIENT_SECRET={{ your-github-client-secret }}
+DRONE_SERVER_HOST={{ your-drone-server-host }}
+DRONE_SERVER_PROTO={{ your-drone-server-protocol }}
 ```
 
-- create `.drone.secret.env` file with the following environment variables
+**Kubernetes**
+
+- create `.drone.env` file with the following environment variables
 
 ```
-DRONE_SECRET=
+your-github-client-id: {{ your-github-client-id }}
+your-github-client-secret: {{ your-github-client-secret }}
+your-drone-server-host:  {{ your-drone-server-host }}
+your-drone-server-protocol: {{ your-drone-server-protocol }}
+your-shared-secret: {{ your-shared-secret }}
 ```
+
+`$ bosh interpolate k8s_yaml.yml --vars-file=.drone.env > k8s.yml`
+
+`$ kubectl apply -f k8s.yml`
+
+`$ kubectl expose pod drone --port=8000 --target-port=80 --type=NodePort`

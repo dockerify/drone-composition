@@ -2,3 +2,4 @@ drone-data/
 *.env
 *.envrc
 *.swp
+k8s.yml
