@@ -10,6 +10,5 @@ compose:
 	docker-compose up --detach
 
 creds:
-	lpass show 2386970112862933478 --notes | grep ^DRONE > .drone.env
-	lpass show 2386970112862933478 --notes | grep ^DRONE_SECRET > .drone.secret.env
+	lpass show 7957002932100587888 --notes | grep ^DRONE > .drone.env
 

@@ -2,32 +2,20 @@ version: '3'
 
 services:
   drone-server:
-    image: drone/drone:0.8
+    image: drone/drone:1.0.0-rc.4
     ports:
-      - '8000:8000'
-      - '9000'
+      - '80:80'
+      - '443:443'
     networks:
       - default
     volumes:
       - ./drone-data:/var/lib/drone/
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: always
     env_file: .drone.env
     environment:
-      - DRONE_OPEN=false
-
-  drone-agent:
-    image: drone/agent:0.8
-    command: agent
-    restart: always
-    links: [drone-server]
-    depends_on: [drone-server]
-    networks:
-      - default
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    env_file: .drone.secret.env
-    environment:
-      - DRONE_SERVER=drone-server:9000
+      - DRONE_GITHUB_SERVER=https://github.com
+      - DRONE_RUNNER_CAPACITY=2
 
 networks:
   default:
