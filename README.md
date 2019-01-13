@@ -25,7 +25,7 @@ your-drone-server-protocol: {{ your-drone-server-protocol }}
 your-shared-secret: {{ your-shared-secret }}
 ```
 
-`$ bosh interpolate k8s_yaml.yml --vars-file=.drone.env > k8s.yml`
+`$ bosh interpolate k8s.tmpl.yml --vars-file=.drone.env > k8s.yml`
 
 `$ kubectl apply -f k8s.yml`
 
