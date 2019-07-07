@@ -2,7 +2,7 @@ version: '3'
 
 services:
   drone-server:
-    image: drone/drone:1.0.0-rc.4
+    image: drone/drone
     ports:
       - '80:80'
       - '443:443'
